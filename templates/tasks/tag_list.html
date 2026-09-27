@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="fw-bold">Tags</h1>
+  <a href="{% url 'tasks:tag-create' %}" class="btn btn-primary btn-sm px-3 py-2 fw-semibold">Add tag</a>
+</div>
+
+<table class="table align-middle table-borderless">
+  <thead>
+    <tr class="border-bottom">
+      <th scope="col" class="fw-bold text-muted py-2">Name</th>
+      <th scope="col" class="fw-bold text-muted py-2">Update</th>
+      <th scope="col" class="fw-bold text-muted py-2">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tag in tag_list %}
+      <tr class="border-bottom">
+        <td class="fw-semibold py-3">{{ tag.name }}</td>
+        <td>
+          <a href="{% url 'tasks:tag-update' pk=tag.pk %}" class="btn btn-secondary btn-sm py-2 px-3">Update</a>
+        </td>
+        <td>
+          <a href="{% url 'tasks:tag-delete' pk=tag.pk %}" class="btn btn-secondary btn-sm py-2 px-3">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="3" class="text-muted py-3">No tags created yet.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
